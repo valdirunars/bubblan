@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "dist/app.js",
   "scripts": {
-    "dev": "nodemon --exec jiti src/app.ts",
-    "start": "tsc && node dist/app.js",
+    "dev": "npm --prefix ../client run build && nodemon --exec jiti src/app.ts",
+    "start": "npm --prefix ../client run build && tsc && node dist/app.js",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "build": "tsc",
