@@ -1,0 +1,71 @@
+### Users API - HTTP requests for testing
+### Base URL (adjust if your server uses a different path)
+@baseUrl = http://localhost:8080/api/users
+
+### Get all users
+GET {{baseUrl}}
+
+### Get user by ID
+GET {{baseUrl}}/1
+
+### Create user (requires: name, role, contactInfo with email or phone)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "role": "user",
+  "contactInfo": {
+    "email": "jane@example.com"
+  }
+}
+
+### Create user with phone instead of email
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "John Smith",
+  "role": "admin",
+  "contactInfo": {
+    "phone": "+1234567890"
+  },
+  "preferredLanguage": "en"
+}
+
+### Create user with both email and phone
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Alice Johnson",
+  "role": "user",
+  "contactInfo": {
+    "email": "alice@example.com",
+    "phone": "+0987654321"
+  },
+  "preferredLanguage": "is"
+}
+
+### Update user (partial update - all fields optional)
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+  "name": "Jane Doe Updated",
+  "role": "admin"
+}
+
+### Update user - change contact info
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+  "contactInfo": {
+    "email": "newemail@example.com",
+    "phone": "+1111111111"
+  }
+}
+
+### Delete user
+DELETE {{baseUrl}}/1
