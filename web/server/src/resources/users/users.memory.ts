@@ -1,4 +1,27 @@
-import { IDataRepository, PaginationParams } from "../../db/interface";
+export interface PaginationParams {
+  page?: number;
+  limit?: number;
+}
+
+export interface PaginatedResult<T> {
+  items: T[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export interface IDataRepository<T> {
+  getById(id: string): Promise<T | null>;
+  getAll(params?: PaginationParams): Promise<PaginatedResult<T>>;
+  create(item: Omit<T, "id" | "createdAt" | "updatedAt">): Promise<T>;
+  update(
+    id: string,
+    item: Partial<Omit<T, "createdAt" | "updatedAt">>,
+  ): Promise<T>;
+  delete(id: string): Promise<void>;
+}
+
 import { User } from "./users.schema";
 
 let users: User[] = [

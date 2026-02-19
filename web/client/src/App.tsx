@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { SessionProvider } from "./context/SessionContext";
+import { Home } from "./components/Home";
+import { SignIn } from "./components/SignIn";
+import { SignUp } from "./components/SignUp";
+import { AuthCallback } from "./components/AuthCallback";
 
 function App() {
-  const [data, setData] = useState<{ message: string } | null>(null);
-  useEffect(() => {
-    fetch("/api/hello")
-      .then((response) => response.json())
-      .then((data) => setData(data))
-      .catch((error) => console.error("Error:", error));
-  }, []);
-
   return (
-    <>
-      <div>
-        <h1>App</h1>
-        {data && <p>{data.message}</p>}
-      </div>
-    </>
+    <SessionProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="/auth/sign-in" element={<SignIn />} />
+          <Route path="/auth/sign-up" element={<SignUp />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </SessionProvider>
   );
 }
 
