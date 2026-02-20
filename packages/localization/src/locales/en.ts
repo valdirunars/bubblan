@@ -1,0 +1,38 @@
+export const en = {
+  hello: "Hello",
+  dudeWheresMyCar: "Dude where's my car?",
+  nested: {
+    dudeWheresMyCar2: "Dude where's my car? 2",
+    dudeWheresMyCar3: "Dude where's my car? 3",
+  },
+  common: {
+    email: "Email",
+    password: "Password",
+    back: "Back",
+    home: "Home",
+    unknown: "unknown",
+    loading: "Loading...",
+  },
+  auth: {
+    signIn: "Sign In",
+    signUp: "Sign Up",
+    signOut: "Sign out",
+    emailAndPassword: "Email & Password",
+    createAccount: "Create account",
+    loggedInAs: "Logged in as",
+    dontHaveAccount: "Don't have an account? Sign up",
+    alreadyHaveAccount: "Already have an account? Sign in",
+    loggingIn: "Logging in...",
+    signingUp: "Signing up...",
+    confirmingEmail: "Confirming your email...",
+    checkEmail: "Check your email to confirm your account.",
+    verificationFailed: "Verification failed",
+    backToSignIn: "Back to sign in",
+    signInFailed: "Sign in failed",
+    signUpFailed: "Sign up failed",
+    notImplemented: {
+      emailLink: "Email link not implemented",
+      social: "Social login not implemented",
+    },
+  },
+};

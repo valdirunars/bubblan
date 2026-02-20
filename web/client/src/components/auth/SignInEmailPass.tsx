@@ -7,6 +7,7 @@ import { Card } from "../Card";
 import { AuthInput } from "./AuthInput";
 import { Button } from "../Button";
 import { AuthLink } from "./AuthLink";
+import { useLocalization } from "../../localization";
 
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8080";
 
@@ -14,8 +15,12 @@ type SignInEmailPassProps = {
   showBackLink?: boolean;
 };
 
-export const SignInEmailPass = ({ showBackLink = true }: SignInEmailPassProps) => {
+export const SignInEmailPass = ({
+  showBackLink = true,
+}: SignInEmailPassProps) => {
   const { session } = useSession();
+  const { translate } = useLocalization();
+
   if (session) return <Navigate to="/" />;
 
   const [status, setStatus] = useState("");
@@ -30,7 +35,7 @@ export const SignInEmailPass = ({ showBackLink = true }: SignInEmailPassProps) =
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus("Logging in...");
+    setStatus(translate("auth.loggingIn"));
 
     try {
       const res = await fetch(`${API_URL}/api/auth/sign-in`, {
@@ -42,7 +47,7 @@ export const SignInEmailPass = ({ showBackLink = true }: SignInEmailPassProps) =
       const data = await res.json();
 
       if (!res.ok) {
-        setStatus(data.error ?? "Sign in failed");
+        setStatus(data.error ?? translate("auth.signInFailed"));
         return;
       }
 
@@ -54,11 +59,11 @@ export const SignInEmailPass = ({ showBackLink = true }: SignInEmailPassProps) =
       }
       setStatus("");
     } catch {
-      setStatus("Sign in failed");
+      setStatus(translate("auth.signInFailed"));
     }
   };
 
-  const isError = status && status !== "Logging in...";
+  const isError = status && status !== translate("auth.loggingIn");
 
   return (
     <AuthLayout className="relative">
@@ -67,18 +72,18 @@ export const SignInEmailPass = ({ showBackLink = true }: SignInEmailPassProps) =
           className="absolute top-6 left-6 text-slate-500 text-sm font-medium hover:text-slate-900 transition-colors"
           to="/auth/sign-in"
         >
-          ← Back
+          ← {translate("common.back")}
         </Link>
       )}
       <form onSubmit={handleSubmit} className="w-full max-w-[22rem]">
         <Card>
           <h1 className="text-xl font-semibold text-slate-900 tracking-tight mb-6">
-            Sign In
+            {translate("auth.signIn")}
           </h1>
           <AuthInput
             id="signin-email"
             name="email"
-            label="Email"
+            label={translate("common.email")}
             type="email"
             placeholder="you@example.com"
             autoComplete="email"
@@ -88,17 +93,19 @@ export const SignInEmailPass = ({ showBackLink = true }: SignInEmailPassProps) =
           <AuthInput
             id="signin-password"
             name="password"
-            label="Password"
+            label={translate("common.password")}
             type="password"
             placeholder="••••••••"
             autoComplete="current-password"
             value={formValues.password}
             onChange={handleInputChange}
           />
-          <Button type="submit" fullWidth className="mt-2">Sign in</Button>
+          <Button type="submit" fullWidth className="mt-2">
+            {translate("auth.signIn")}
+          </Button>
           <div className="mt-6 pt-5 border-t border-slate-200 text-center">
             <AuthLink to="/auth/sign-up">
-              Don't have an account? Sign up
+              {translate("auth.dontHaveAccount")}
             </AuthLink>
           </div>
           {status && (

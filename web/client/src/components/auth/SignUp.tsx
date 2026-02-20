@@ -3,12 +3,15 @@ import { Link, Navigate } from "react-router-dom";
 import { Button } from "../Button";
 import { useSession } from "../../context/SessionContext";
 import { supabase } from "../../supabase/supabase";
+import { useLocalization } from "../../localization";
 
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8080";
 const APP_URL = import.meta.env.VITE_APP_URL ?? window.location.origin;
 
 export const SignUp = () => {
   const { session } = useSession();
+  const { translate } = useLocalization();
+
   if (session) return <Navigate to="/" />;
 
   const [status, setStatus] = useState("");
@@ -23,7 +26,7 @@ export const SignUp = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus("Signing up...");
+    setStatus(translate("auth.signingUp"));
 
     try {
       const redirectTo = `${APP_URL}/auth/callback`;
@@ -36,7 +39,7 @@ export const SignUp = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        setStatus(data.error ?? "Sign up failed");
+        setStatus(data.error ?? translate("auth.signUpFailed"));
         return;
       }
 
@@ -47,14 +50,14 @@ export const SignUp = () => {
         });
         setStatus("");
       } else {
-        setStatus("Check your email to confirm your account.");
+        setStatus(translate("auth.checkEmail"));
       }
     } catch {
-      setStatus("Sign up failed");
+      setStatus(translate("auth.signUpFailed"));
     }
   };
 
-  const isError = status && status !== "Signing up...";
+  const isError = status && status !== translate("auth.signingUp");
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-slate-50 to-slate-100 relative">
@@ -62,21 +65,21 @@ export const SignUp = () => {
         className="absolute top-6 left-6 text-slate-500 text-sm font-medium hover:text-slate-900 transition-colors"
         to="/"
       >
-        ← Home
+        ← {translate("common.home")}
       </Link>
       <form
         className="w-full max-w-[22rem] p-8 bg-white rounded-xl shadow-sm border border-slate-200"
         onSubmit={handleSubmit}
       >
         <h1 className="text-xl font-semibold text-slate-900 tracking-tight mb-6">
-          Sign Up
+          {translate("auth.signUp")}
         </h1>
         <div className="flex flex-col gap-1.5 mb-4">
           <label
             htmlFor="signup-email"
             className="text-[0.8125rem] font-medium text-slate-600"
           >
-            Email
+            {translate("common.email")}
           </label>
           <input
             id="signup-email"
@@ -93,7 +96,7 @@ export const SignUp = () => {
             htmlFor="signup-password"
             className="text-[0.8125rem] font-medium text-slate-600"
           >
-            Password
+            {translate("common.password")}
           </label>
           <input
             id="signup-password"
@@ -106,14 +109,14 @@ export const SignUp = () => {
           />
         </div>
         <Button type="submit" fullWidth className="mt-2">
-          Create account
+          {translate("auth.createAccount")}
         </Button>
         <div className="mt-6 pt-5 border-t border-slate-200 text-center">
           <Link
             className="text-sm text-blue-500 font-medium hover:text-blue-600 transition-colors"
             to="/auth/sign-in"
           >
-            Already have an account? Sign in
+            {translate("auth.alreadyHaveAccount")}
           </Link>
         </div>
         {status && (

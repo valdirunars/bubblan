@@ -1,0 +1,38 @@
+export const is = {
+  hello: "Halló",
+  dudeWheresMyCar: "Melur hvar er skrjóðurinn?",
+  nested: {
+    dudeWheresMyCar2: "Melur hvar er skrjóðurinn? 2",
+    dudeWheresMyCar3: "Dude where's my car? 3",
+  },
+  common: {
+    email: "Netfang",
+    password: "Lykilorð",
+    back: "Til baka",
+    home: "Heim",
+    unknown: "óþekktur",
+    loading: "Hleður...",
+  },
+  auth: {
+    signIn: "Skrá inn",
+    signUp: "Nýskráning",
+    signOut: "Skrá út",
+    emailAndPassword: "Netfang og lykilorð",
+    createAccount: "Búa til aðgang",
+    loggedInAs: "Skráður inn sem",
+    dontHaveAccount: "Ertu ekki með aðgang? Nýskráning",
+    alreadyHaveAccount: "Ertu með aðgang? Skrá inn",
+    loggingIn: "Skrái inn...",
+    signingUp: "Nýskrái...",
+    confirmingEmail: "Staðfesti netfang...",
+    checkEmail: "Athugaðu netfangið þitt til að staðfesta aðganginn.",
+    verificationFailed: "Staðfesting mistókst",
+    backToSignIn: "Til baka í innskráningu",
+    signInFailed: "Innskráning mistókst",
+    signUpFailed: "Nýskráning mistókst",
+    notImplemented: {
+      emailLink: "Netfangshlekkur ekki útfærður",
+      social: "Samfélagsinnskráning ekki útfærð",
+    },
+  },
+};

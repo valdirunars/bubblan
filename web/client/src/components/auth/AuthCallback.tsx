@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useSession } from "../../context/SessionContext";
+import { useLocalization } from "../../localization";
 
 /**
  * Handles the redirect from Supabase email verification.
@@ -9,6 +10,7 @@ import { useSession } from "../../context/SessionContext";
  */
 export const AuthCallback = () => {
   const { session } = useSession();
+  const { translate } = useLocalization();
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -28,14 +30,14 @@ export const AuthCallback = () => {
       <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-slate-50 to-slate-100">
         <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-sm border border-slate-200 text-center">
           <h1 className="text-lg font-semibold text-slate-900 mb-2">
-            Verification failed
+            {translate("auth.verificationFailed")}
           </h1>
           <p className="text-sm text-slate-600 mb-6">{error}</p>
           <a
             href="/auth/sign-in"
             className="text-sm font-medium text-blue-500 hover:text-blue-600"
           >
-            Back to sign in
+            {translate("auth.backToSignIn")}
           </a>
         </div>
       </main>
@@ -53,7 +55,7 @@ export const AuthCallback = () => {
         aria-hidden
       />
       <span className="text-sm text-slate-500 tracking-wide">
-        Confirming your email...
+        {translate("auth.confirmingEmail")}
       </span>
     </main>
   );
