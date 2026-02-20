@@ -1,8 +1,7 @@
+import "dotenv/config";
 import express from "express";
 import path from "path";
 import { existsSync } from "fs";
-import dotenv from "dotenv";
-dotenv.config();
 import cookieParser from "cookie-parser";
 import { authRouter } from "./resources/auth/auth.routes";
 import { usersRouter } from "./resources/users/users.routes";

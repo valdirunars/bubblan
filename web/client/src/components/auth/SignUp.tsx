@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { useSession } from "../context/SessionContext";
-import { supabase } from "../supabase/supabase";
+import { Button } from "../Button";
+import { useSession } from "../../context/SessionContext";
+import { supabase } from "../../supabase/supabase";
 
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8080";
 const APP_URL = import.meta.env.VITE_APP_URL ?? window.location.origin;
@@ -71,7 +72,10 @@ export const SignUp = () => {
           Sign Up
         </h1>
         <div className="flex flex-col gap-1.5 mb-4">
-          <label htmlFor="signup-email" className="text-[0.8125rem] font-medium text-slate-600">
+          <label
+            htmlFor="signup-email"
+            className="text-[0.8125rem] font-medium text-slate-600"
+          >
             Email
           </label>
           <input
@@ -85,7 +89,10 @@ export const SignUp = () => {
           />
         </div>
         <div className="flex flex-col gap-1.5 mb-4">
-          <label htmlFor="signup-password" className="text-[0.8125rem] font-medium text-slate-600">
+          <label
+            htmlFor="signup-password"
+            className="text-[0.8125rem] font-medium text-slate-600"
+          >
             Password
           </label>
           <input
@@ -98,12 +105,9 @@ export const SignUp = () => {
             className="w-full px-3.5 py-2.5 text-[0.9375rem] text-slate-900 bg-white border border-slate-200 rounded-lg placeholder:text-slate-400 hover:border-slate-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-colors"
           />
         </div>
-        <button
-          type="submit"
-          className="w-full mt-2 py-2.5 px-4 text-[0.9375rem] font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 active:bg-slate-700 transition-colors"
-        >
+        <Button type="submit" fullWidth className="mt-2">
           Create account
-        </button>
+        </Button>
         <div className="mt-6 pt-5 border-t border-slate-200 text-center">
           <Link
             className="text-sm text-blue-500 font-medium hover:text-blue-600 transition-colors"

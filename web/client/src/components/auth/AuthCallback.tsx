@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { useSession } from "../context/SessionContext";
+import { useSession } from "../../context/SessionContext";
 
 /**
  * Handles the redirect from Supabase email verification.
